@@ -6,7 +6,7 @@ var fs = require('fs');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const { CheckerPlugin } = require('awesome-typescript-loader');
 const nodeExternals = require('webpack-node-externals');
 
 /**
@@ -245,7 +245,7 @@ module.exports = function(env) {
        *
        * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
        */
-      new ForkCheckerPlugin(),
+      new CheckerPlugin(),
 
       /*
        * Plugin: CopyWebpackPlugin
