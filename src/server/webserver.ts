@@ -51,7 +51,7 @@ export class Webserver {
   // log debug info
   private debug: boolean = false;
   // einzufuegende APIs
-  private apis: Array<ApiDefinition> = [];
+  private apis: ApiDefinition[] = [];
   // CORS Optionen, sofern gebraucht (z.B. fake asp)
   private corsOptions: any = null;
 
@@ -233,9 +233,8 @@ export class Webserver {
     sessionrouter.route(saveSessionURL)
         .post((req: express.Request, res: express.Response, next: express.NextFunction) => {
           console.info("sessionrouter /setuserdata");
-          let userid = req["session"]["user"]._id;
           req["session"]["user"].session = req.body;
-          this.usersess.setUserData(userid, req.body)
+          this.usersess.setUserData(req.body)
               .then( (rc) => {
                 console.info("save user OK");
                 res.send("OK");
@@ -306,7 +305,7 @@ export class Webserver {
       default:
         break;
     }
-    user.then( usrid => {
+    user.then( (usrid) => {
       if (usrid) {
         let token = uuid.v4();
         console.info("SESSION: uid=" + usrid + " new token=" + token);
@@ -368,7 +367,7 @@ export class Webserver {
 
   private killSession(req: express.Request) {
     if (req.session) {
-      req.session.destroy(err => {
+      req.session.destroy( (err) => {
         if (err) {
           console.error("error destroying session: ", err);
         } else {

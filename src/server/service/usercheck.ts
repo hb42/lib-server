@@ -22,8 +22,7 @@ export interface UserCheck {
   /**
    * save user data object
    *
-   * @param id - record ID
    * @param data - user data
    */
-  setUserData(id: string, data: any): Promise<any>;
+  setUserData(data: any): Promise<any>;
 }
