@@ -1,7 +1,11 @@
+/**
+ * Created by hb on 18.09.16.
+ */
 "use strict";
-const mysql = require("mysql");
-class MySQL {
-    constructor(srv, db, usr, pwd) {
+var mysql = require("mysql");
+var MySQL = (function () {
+    function MySQL(srv, db, usr, pwd) {
+        // options: https://github.com/mysqljs/mysql#pool-options
         this.pool = mysql.createPool({
             host: srv,
             user: usr,
@@ -14,24 +18,25 @@ class MySQL {
             waitForConnections: true,
         });
         this.cnt = 0;
-        this.pool.on("connection", (connection) => {
+        this.pool.on("connection", function (connection) {
+            // connection.query('SET SESSION auto_increment_increment=1')
             console.info("INFO pool on connection");
         });
     }
-    query(q, cb) {
+    MySQL.prototype.query = function (q, cb) {
         console.info("INFO query #" + this.cnt++);
-        this.pool.getConnection((err, connection) => {
+        this.pool.getConnection(function (err, connection) {
             if (err) {
                 console.error("Error in pool.getConnection: " + err);
                 cb(null);
                 return;
             }
-            connection.on("error", (er3) => {
+            connection.on("error", function (er3) {
                 console.error("Error in connectio: " + er3);
                 cb(null);
             });
             console.info("INFO connected as id " + connection.threadId);
-            connection.query(q, (er2, rows) => {
+            connection.query(q, function (er2, rows) {
                 connection.release();
                 if (er2) {
                     console.error("Error in query: " + er2);
@@ -40,7 +45,7 @@ class MySQL {
                 cb(rows);
             });
         });
-    }
-}
+    };
+    return MySQL;
+}());
 exports.MySQL = MySQL;
-//# sourceMappingURL=mysql.js.map

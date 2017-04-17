@@ -1,6 +1,5 @@
 /**
- * Created by hb on 22.10.16.
+ * Created by hb on 07.03.17.
  */
 
 export * from "./server";
-export * from "./server/service";

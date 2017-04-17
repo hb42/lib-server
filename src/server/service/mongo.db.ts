@@ -6,7 +6,6 @@ import * as mongoose from "mongoose";
 
 // ES6 native Promise in Mongoose: mongoose.Promise = global.Promise
 // (die (<any> Konstruktion ist noetig wg. Typescript-Error TS2450)
-// ausserdem index.d.ts mit: type MongoosePromise<T> = Promise<T>;
 // ES5 ext. lib einbinden: mongoose.Promise = require('q').Promise; | = require('bluebird');
 // (mongoose v5 wird in ES5 bluebird verwenden)
 (<any> mongoose).Promise = Promise;

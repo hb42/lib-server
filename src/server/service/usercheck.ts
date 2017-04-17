@@ -14,15 +14,9 @@ export interface UserCheck {
   authUser(uid: string, pwd?: string): Promise<string>;
 
   /**
-   * returns user data object
+   * returns user object || throws error
    * (wird i.d.R. in authUser geholt)
    */
-  getUserData(): any;
+  getUser(uid: string): Promise<any>;
 
-  /**
-   * save user data object
-   *
-   * @param data - user data
-   */
-  setUserData(data: any): Promise<any>;
 }
