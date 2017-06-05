@@ -40,7 +40,8 @@ export class Webserver {
   // timeout f. session cookie (nur wenn im c'tor usersess gesetzt)
   private cookieMaxAgeMinutes: number = 60 * 24;  // 1 Tag
   // webapp (set to null if no content)
-  private staticContent: string = "./static";
+  private staticContent: string = null; // "./static";
+  private staticUrl: string = staticURL; // == BASE_URL default "/app"
   // favicon path (has to be set)
   private faviconPath: string = null;
   // log debug info
@@ -69,6 +70,10 @@ export class Webserver {
 
   public setStaticContent(path: string) {
     this.staticContent = path;
+  }
+
+  public setStaticUrl(url: string) {
+    this.staticUrl = url;
   }
 
   public setFaviconPath(path: string) {
@@ -109,7 +114,7 @@ export class Webserver {
   private insertStandards() {
     this.app.use(compression());
     this.app.use(bodyparser.urlencoded({extended: true}));
-    this.app.use(bodyparser.json());
+    this.app.use(bodyparser.json({limit: "10mb"}));
     this.app.use(cookieParser());
     if (this.faviconPath) {
       this.app.use(favicon(this.faviconPath));
@@ -145,7 +150,7 @@ export class Webserver {
   private insertStatic() {
     if (this.staticContent) {
       // TODO fallthrough abschalten -> Doku
-      this.app.use(staticURL, express.static(this.staticContent));
+      this.app.use(this.staticUrl, express.static(this.staticContent));
     }
   }
 
@@ -196,12 +201,12 @@ export class Webserver {
     const mainrouter = express.Router();
     this.app.use("/", mainrouter);
 
-    // "/" auf webapp umleiten
+    // "/" auf webapp umleiten (fkt. nur, wenn static im REST-Server gehosted wird)
     mainrouter.route("/")
         .all((req: express.Request, res: express.Response, next: express.NextFunction) => {
           if (this.staticContent) {
             console.info("mainrouter redirect /");
-            res.redirect(staticURL); // zur Startseite (fkt. nicht f. ajax!)
+            res.redirect(this.staticUrl); // zur Startseite (fkt. nicht f. ajax!)
           } else {
             next();
           }
