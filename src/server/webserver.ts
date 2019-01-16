@@ -47,8 +47,8 @@ export class Webserver {
   private apis: RestApi[] = [];
   // CORS Optionen, sofern gebraucht (z.B. fake asp)
   private corsOptions: any = null;
-  // Login-Token-Timeout milis (damit das mit IE-F12 fkt. muesste > 5000 gesetzt werden)
-  private tokentimeout = 1000;
+  // Login-Token-Timeout milis
+  private tokentimeout = 5000;
   // JWT handling
   private authService: AuthService;
   // SSE-URL (beginnt immer mit /sse/)
