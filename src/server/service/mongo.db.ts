@@ -8,9 +8,6 @@ import { LoggerService } from "./logger.service";
 // (mongoose v5 wird in ES5 bluebird verwenden)
 (mongoose as any).Promise = Promise;
 
-// var Schema = mongoose.Schema;
-// var ObjectId = Schema.Types.ObjectId;
-
 /* Multiple Connections:
   var conn = mongoose.createConnection(...)
   -> models sind an connection gebunden => *.model.ts muesste angepasst werden

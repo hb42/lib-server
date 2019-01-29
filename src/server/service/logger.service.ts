@@ -1,21 +1,15 @@
-/**
- * Created by hb on 07.03.17.
- */
-
 import * as log4js from "log4js";
 /*
  LOG4JS  -> https://github.com/nomiddlename/log4js-node
  Loglevels
-
- OFF
- FATAL
- ERROR
- WARN
- INFO
- DEBUG
- TRACE
- ALL
-
+   OFF
+   FATAL
+   ERROR
+   WARN
+   INFO
+   DEBUG
+   TRACE
+   ALL
  */
 
 /**

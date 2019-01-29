@@ -1,7 +1,3 @@
-/**
- * Created by hb on 07.08.16.
- */
-
 export interface UserCheck {
   /**
    * check user/pwd

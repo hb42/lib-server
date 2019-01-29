@@ -1,7 +1,3 @@
-/**
- * Created by hb on 09.08.16.
- */
-
 import * as bodyparser from "body-parser";
 import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
@@ -13,7 +9,6 @@ import * as uuid from "uuid";
 
 import {
   authURL,
-  keepaliveURL,
   loginURL,
   makeSseUrl,
   staticURL,
@@ -239,20 +234,6 @@ export class Webserver {
           // req[""] = req.params.conf_name;
           this.login(req, res);
         });
-    // keepalive call
-    mainrouter.route(keepaliveURL)
-        .get((req: express.Request, res: express.Response, next: express.NextFunction) => {
-          this.log.debug("mainrouter KEEPALIVE: ", keepaliveURL);
-          // if (req.session && req.session.active) {
-          if (this.authService.checkToken(req)) {
-            // req.session.touch((err: any) => this.log.error("ERROR at express-session.Touch()"));
-            res.send("OK");
-          } else {
-            this.log.error("invalid session send 401");
-            // res.send(null);  // -> error in cli
-            res.sendStatus(401);  // muss Webapp behandeln
-          }
-        });
     // check session
     mainrouter.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
       this.log.debug("mainrouter default " + req.path);
@@ -271,7 +252,6 @@ export class Webserver {
         } else {
           this.log.error("check session: NOT active, send 401");
           res.sendStatus(401);  // muss Webapp behandeln
-          // res.send(null);
         }
       } else {
         next();
@@ -282,7 +262,6 @@ export class Webserver {
       this.sse = new ServerSentEvent();
       this.log.info("set SSE route to " + this.sseUrl);
       mainrouter.route(this.sseUrl).get(this.sse.init);
-      // this.app.get(this.sseUrl, this.sse.init);
     }
   }
 
