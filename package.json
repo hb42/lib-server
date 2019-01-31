@@ -1,6 +1,6 @@
 {
   "name": "@hb42/lib-server",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "copyright": "Copyright (c) 2018-2019 Hartmut Bauer",
   "description": "Common objects for node serverss",
   "main": "lib/index.js",
