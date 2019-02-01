@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { EventEmitter } from "events";
 import { Request, Response } from "express";
 export declare class ServerSentEvent extends EventEmitter {
