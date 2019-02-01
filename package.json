@@ -12,13 +12,18 @@
     "clean": "npm run clean:lib && npm run clean:tmp",
     "build": "npm run clean && tsc",
     "commit": "git add -A ./lib && git commit -m \"package\" ./lib",
-    "push": "git push && git push --tags",
     "make": "npm run build && npm run commit && npm version prerelease --preid=beta",
-    "release": "npm run build && npm run commit && npm version patch"
+    "release:patch": "npm run build && npm run commit && npm version patch",
+    "release:minor": "npm run build && npm run commit && npm version minor",
+    "release:major": "npm run build && npm run commit && npm version major",
+    "release": "npm run release:patch"
   },
   "author": "hb",
   "license": "MIT",
   "repository": "hb42/lib-server",
+  "config": {
+    "platform": "win"
+  },
   "peerDependencies": {
     "@hb42/lib-common": "https://github.com/hb42/lib-common.git#semver:^1.0.0",
     "body-parser": "^1.15.2",
@@ -36,7 +41,7 @@
     "uuid": "^3.0.0"
   },
   "devDependencies": {
-    "@hb42/lib-common": "https://github.com/hb42/lib-common.git#semver:^1.0.0",
+    "@hb42/lib-common": "git+https://github.com/hb42/lib-common.git#semver:^1.0.0",
     "@types/body-parser": "^1.17.0",
     "@types/compression": "0.0.36",
     "@types/cookie-parser": "^1.4.1",
@@ -45,9 +50,9 @@
     "@types/express-session": "^1.15.11",
     "@types/jsonwebtoken": "^8.0.0",
     "@types/ldapjs": "^1.0.3",
-    "@types/mongoose": "^5.3.11",
+    "@types/mongoose": "^5.3.12",
     "@types/mysql": "^2.15.5",
-    "@types/node": "^10.12.20",
+    "@types/node": "^10.12.21",
     "@types/serve-favicon": "^2.2.30",
     "@types/uuid": "^3.4.4",
     "angular2-template-loader": "^0.6.0",
@@ -66,7 +71,7 @@
     "rimraf": "^2.6.3",
     "serve-favicon": "^2.5.0",
     "tslint": "^5.12.1",
-    "typescript": "^3.2.4",
+    "typescript": "^3.3.1",
     "uuid": "^3.3.2"
   },
   "dependencies": {}

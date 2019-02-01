@@ -39,7 +39,7 @@ export class MongoDB {
       reconnectTries   : 100,  // Server attempt to reconnect #times (default 30)
       reconnectInterval: 1000, // Server will wait # milliseconds between retries (default 1000)
       autoReconnect    : true, // Reconnect on error (default true)
-      keepAlive        : 0, // TCP KeepAlive on the socket with a X ms delay before start (default 0)
+      keepAlive        : true, // TCP KeepAlive on the socket
       connectTimeoutMS : 0,    // TCP Connection timeout setting (default 0)
       socketTimeoutMS  : 0,    // TCP Socket timeout setting (default 0)
       useNewUrlParser  : true, // mongoDB >= 4
