@@ -11,7 +11,7 @@
     "clean:tmp": "./node_modules/.bin/rimraf tmp",
     "clean": "npm run clean:lib && npm run clean:tmp",
     "build": "npm run clean && tsc",
-    "commit": "git add -A ./lib && git commit -m \"package\" ./lib",
+    "commit": "git add -A ./lib && git commit -m \"publish npm package\" ./lib",
     "make": "npm run build && npm run commit && npm version prerelease --preid=beta",
     "release:patch": "npm run build && npm run commit && npm version patch",
     "release:minor": "npm run build && npm run commit && npm version minor",
