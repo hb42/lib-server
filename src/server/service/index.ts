@@ -1,4 +1,3 @@
-export * from "./mongo.db";
 export * from "./restapi";
 export * from "./usercheck";
 export * from "./logger.service";
